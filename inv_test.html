@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INNOVEX - Технологический хаб</title>
+    <style>
+        /* Переменные для цветов и эффектов */
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #FFFFFF;
+            --accent-color: #00BFFF;
+            --dark-accent: #1E90FF;
+            --accent-glow: 0 0 5px rgba(0, 191, 255, 0.5);
+            --font-main: 'Courier New', monospace;
+            --font-heading: Arial, sans-serif;
+            --cyber-edge: 4px;
+        }
+        
+        /* Базовые стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            font-family: var(--font-main);
+            line-height: 1.6;
+            /* Градиентный фон */
+            background-image: linear-gradient(0deg, rgba(0, 10, 20, 0.6) 0%, rgba(0, 0, 0, 0.9) 95%);
+            overflow-x: hidden;
+        }
+        
+        /* Добавляем эффект сканлайнов */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 30, 60, 0.1) 50%);
+            background-size: 100% 4px;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0.2;
+            animation: scanline 8s linear infinite;
+        }
+        
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            position: relative;
+        }
+        
+        /* Стили для хедера */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(0, 191, 255, 0.15);
+            position: relative;
+            text-align: center; /* Центрируем содержимое шапки */
+        }
+        
+        /* Стилизация шапки для центрирования всех элементов */
+        header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 42px;
+            font-weight: bold;
+            color: var(--secondary-color);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            /* Добавляем анимацию мерцания */
+            animation: flicker 8s infinite;
+            margin-bottom: 15px; /* Отступ до навигации */
+        }
+        
+        @keyframes flicker {
+            0% { opacity: 1; }
+            5% { opacity: 0.8; }
+            10% { opacity: 1; }
+            15% { opacity: 0.9; }
+            20% { opacity: 1; }
+            45% { opacity: 1; }
+            50% { opacity: 0.95; }
+            55% { opacity: 1; }
+            80% { opacity: 1; }
+            85% { opacity: 0.9; }
+            90% { opacity: 1; }
+            100% { opacity: 1; }
+        }
+        
+        /* Навигация */
+        nav {
+            width: 100%;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        nav ul li {
+            margin: 0 15px 10px;
+            position: relative;
+        }
+        
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--accent-color);
+        }
+        
+        nav a:hover::before {
+            width: 100%;
+        }
+        
+        /* Стили для героя */
+        .hero {
+            padding: 70px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Добавляем радиальный градиент для фона героя */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 191, 255, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            z-index: -1;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-family: var(--font-heading);
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            position: relative;
+        }
+        
+        /* Глитч-эффект для заголовка */
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch-text::before {
+            left: 2px;
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+        
+        .glitch-text::after {
+            left: -2px;
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        
+        @keyframes glitch-anim-1 {
+            0% {
+                clip-path: inset(30% 0 50% 0);
+            }
+            20% {
+                clip-path: inset(20% 0 60% 0);
+            }
+            40% {
+                clip-path: inset(40% 0 40% 0);
+            }
+            60% {
+                clip-path: inset(10% 0 70% 0);
+            }
+            80% {
+                clip-path: inset(50% 0 30% 0);
+            }
+            100% {
+                clip-path: inset(30% 0 50% 0);
+            }
+        }
+        
+        @keyframes glitch-anim-2 {
+            0% {
+                clip-path: inset(40% 0 40% 0);
+            }
+            20% {
+                clip-path: inset(60% 0 20% 0);
+            }
+            40% {
+                clip-path: inset(20% 0 60% 0);
+            }
+            60% {
+                clip-path: inset(70% 0 10% 0);
+            }
+            80% {
+                clip-path: inset(10% 0 70% 0);
+            }
+            100% {
+                clip-path: inset(50% 0 30% 0);
+            }
+        }
+        
+        .hero p {
+            font-size: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--accent-color);
+        }
+        
+        /* Стили для разделов */
+        .section {
+            padding: 80px 0;
+            border-bottom: 1px solid #333;
+            position: relative;
+        }
+        
+        /* Добавляем идентификатор раздела */
+        .section::before {
+            content: '[' attr(id) ']';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            color: var(--accent-color);
+            opacity: 0.2;
+            font-size: 14px;
+            letter-spacing: 2px;
+            font-family: var(--font-main);
+        }
+        
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-family: var(--font-heading);
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Добавляем линии к заголовкам */
+        .section-title::before, 
+        .section-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 1px;
+            background-color: var(--accent-color);
+        }
+        
+        .section-title::before {
+            left: -40px;
+        }
+        
+        .section-title::after {
+            right: -40px;
+        }
+        
+        /* Стили для терминал-хедера */
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 30, 60, 0.8);
+            padding: 8px 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--accent-color);
+            border-bottom: none;
+        }
+        
+        .terminal-controls {
+            display: flex;
+            margin-right: 15px;
+        }
+        
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .terminal-close {
+            background-color: #FF5F56;
+        }
+        
+        .terminal-minimize {
+            background-color: #FFBD2E;
+        }
+        
+        .terminal-maximize {
+            background-color: #27C93F;
+        }
+        
+        .terminal-title {
+            color: var(--accent-color);
+            font-size: 14px;
+            flex-grow: 1;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        
+        /* Стили для вайтпейпер-секций */
+        .whitepaper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .wp-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: rgba(0, 30, 60, 0.2);
+            border-left: 3px solid var(--accent-color);
+            /* Добавляем тень */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Добавляем фоновый градиент */
+        .wp-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 0%, rgba(0, 191, 255, 0.05) 50%, transparent 100%);
+            z-index: -1;
+        }
+        
+        .wp-section h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            border-bottom: 1px solid rgba(0, 191, 255, 0.3);
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        /* Добавляем акцентную линию под заголовками */
+        .wp-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            height: 1px;
+            width: 100px;
+            background-color: var(--accent-color);
+        }
+        
+        .wp-section ul {
+            list-style: none;
+            margin-left: 20px;
+            padding: 0;
+        }
+        
+        .wp-section ul li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .wp-section ul li::before {
+            content: '>';
+            color: var(--accent-color);
+            position: absolute;
+            left: -20px;
+        }
+        
+        /* Стили для дистрибуции токенов */
+        .token-distribution {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .token-segment {
+            text-align: center;
+            padding: 20px;
+            margin: 15px;
+            width: 180px;
+            background-color: rgba(0, 30, 60, 0.3);
+            border: 1px solid var(--accent-color);
+            /* Добавляем тень */
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
+            position: relative;
+            /* Добавляем переходы для анимаций */
+            transition: transform 0.3s, box-shadow 0.3s;
+            /* Вырезаем угол для киберпанк-эффекта */
+            clip-path: polygon(
+                var(--cyber-edge) 0, 
+                100% 0, 
+                100% calc(100% - var(--cyber-edge)), 
+                calc(100% - var(--cyber-edge)) 100%, 
+                0 100%,
+                0 var(--cyber-edge)
+            );
+        }
+        
+        /* Добавляем эффект при наведении */
+        .token-segment:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 191, 255, 0.3);
+        }
+        
+        .token-percentage {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .token-label {
+            font-size: 16px;
+        }
+        
+        /* Стили для блоков кода */
+        .code-block {
+            background-color: rgba(0, 30, 60, 0.3);
+            padding: 25px;
+            margin: 30px 0;
+            overflow-x: auto;
+            border-left: 3px solid var(--accent-color);
+            /* Добавляем тень */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            font-family: var(--font-main);
+        }
+        
+        /* Добавляем метку кода */
+        .code-block::before {
+            content: '</> code';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            padding: 0 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .code-line {
+            margin-bottom: 8px;
+            color: #CCC;
+        }
+        
+        /* Чередование цветов строк для читаемости */
+        .code-line:nth-child(odd) {
+            color: #EEE;
+        }
+        
+        /* Стили для CTA секции */
+        .cta-section {
+            text-align: center;
+            padding: 100px 0;
+            /* Добавляем фоновый радиальный градиент */
+            background: radial-gradient(circle at center, rgba(0, 30, 60, 0.4) 0%, rgba(0, 0, 0, 0) 70%);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
+            margin-top: 20px;
+            /* Вырезаем угол для киберпанк-эффекта */
+            clip-path: polygon(
+                var(--cyber-edge) 0, 
+                100% 0, 
+                100% calc(100% - var(--cyber-edge)), 
+                calc(100% - var(--cyber-edge)) 100%, 
+                0 100%,
+                0 var(--cyber-edge)
+            );
+        }
+        
+        /* Анимированный эффект при наведении */
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            background-color: var(--accent-color);
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+            transform: translateX(-100%);
+            transition: transform 0.3s;
+            z-index: -1;
+        }
+        
+        .cta-button:hover {
+            color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+        }
+        
+        .cta-button:hover::before {
+            transform: translateX(0);
+        }
+        
+        /* Стили для футера */
+        footer {
+            padding: 60px 0 40px;
+            text-align: center;
+            /* Добавляем градиентный фон */
+            background: linear-gradient(0deg, rgba(0, 15, 30, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+        }
+        
+        .social-links {
+            margin-bottom: 30px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin: 0 15px;
+            color: var(--secondary-color);
+            font-size: 24px;
+            transition: all 0.3s;
+            position: relative;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border: 1px solid rgba(0, 191, 255, 0.3);
+        }
+        
+        /* Эффект при наведении */
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 191, 255, 0.1);
+            transform: scale(0);
+            transition: transform 0.3s;
+            z-index: -1;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        
+        .social-links a:hover::before {
+            transform: scale(1);
+        }
+        
+        /* Стили для роадмапа */
+        .roadmap {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--accent-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .roadmap-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .roadmap-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+        
+        .roadmap-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+        
+        .roadmap-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--dark-accent);
+            top: 30px;
+            border: 2px solid var(--accent-color);
+            transform: rotate(45deg);
+        }
+        
+        .roadmap-item:nth-child(odd)::after {
+            right: -12px;
+        }
+        
+        .roadmap-item:nth-child(even)::after {
+            left: -12px;
+        }
+        
+        .roadmap-content {
+            padding: 25px;
+            background-color: rgba(0, 30, 60, 0.3);
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
+            position: relative;
+            /* Вырезаем угол для киберпанк-эффекта */
+            clip-path: polygon(
+                0 0, 
+                100% 0, 
+                100% calc(100% - var(--cyber-edge)), 
+                calc(100% - var(--cyber-edge)) 100%, 
+                0 100%
+            );
+        }
+        
+        .roadmap-date {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .roadmap-title {
+            margin-bottom: 10px;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+        
+        /* Декоративные уголки */
+        .cyber-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-color);
+            opacity: 0.7;
+        }
+        
+        .cyber-corner-tl {
+            top: 0;
+            left: 0;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .cyber-corner-tr {
+            top: 0;
+            right: 0;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .cyber-corner-bl {
+            bottom: 0;
+            left: 0;
+            border-right: none;
+            border-top: none;
+        }
+        
+        .cyber-corner-br {
+            bottom: 0;
+            right: 0;
+            border-left: none;
+            border-top: none;
+        }
+        
+        /* TOC */
+        .toc {
+            background-color: rgba(0, 30, 60, 0.3);
+            padding: 25px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            clip-path: polygon(
+                0 0, 
+                100% 0, 
+                100% calc(100% - var(--cyber-edge)), 
+                calc(100% - var(--cyber-edge)) 100%, 
+                0 100%
+            );
+        }
+        
+        .toc::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            opacity: 0.7;
+        }
+        
+        .toc h4 {
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 191, 255, 0.3);
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .toc ul li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .toc a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s;
+            padding: 2px 4px;
+            position: relative;
+        }
+        
+        .toc a:hover {
+            color: var(--accent-color);
+        }
+        
+        .toc a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+        
+        .toc a:hover::after {
+            width: 100%;
+        }
+        
+        /* Мобильное меню */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 25px;
+        }
+        
+        /* Адаптивные стили */
+        /* Планшеты (Portrait) */
+        @media screen and (max-width: 992px) {
+            .logo {
+                font-size: 36px;
+            }
+            
+            .section-title {
+                font-size: 30px;
+            }
+            
+            .section-title::before,
+            .section-title::after {
+                width: 20px;
+            }
+            
+            .section-title::before {
+                left: -30px;
+            }
+            
+            .section-title::after {
+                right: -30px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 20px;
+            }
+            
+            .wp-section h3 {
+                font-size: 24px;
+            }
+            
+            .token-segment {
+                width: 160px;
+                margin: 10px;
+            }
+            
+            .token-percentage {
+                font-size: 28px;
+            }
+        }
+        
+        /* Мобильные устройства */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 0 10px;
+            }
+            
+            header {
+                padding: 15px 0;
+                position: relative;
+            }
+            
+            .logo {
+                font-size: 32px;
+                margin-bottom: 5px;
+            }
+            
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                right: 15px;
+                top: 15px;
+            }
+            
+            nav {
+                margin-top: 15px;
+                width: 100%;
+                display: none; /* Скрываем меню по умолчанию на мобильных */
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0 0 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav a {
+                display: block;
+                padding: 10px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 26px;
+                margin-bottom: 30px;
+            }
+            
+            .section-title::before,
+            .section-title::after {
+                width: 15px;
+            }
+            
+            .section-title::before {
+                left: -20px;
+            }
+            
+            .section-title::after {
+                right: -20px;
+            }
+            
+            .hero {
+                padding: 50px 0;
+            }
+            
+            .hero h1 {
+                font-size: 28px;
+                letter-spacing: 2px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .roadmap::before {
+                left: 20px;
+            }
+            
+            .roadmap-item {
+                width: 100%;
+                padding-left: 50px;
+                padding-right: 10px;
+                left: 0;
+                text-align: left;
+            }
+            
+            .roadmap-item:nth-child(odd) {
+                text-align: left;
+            }
+            
+            .roadmap-item:nth-child(odd)::after {
+                left: 12px;
+                right: auto;
+            }
+            
+            .roadmap-item:nth-child(even)::after {
+                left: 12px;
+            }
+            
+            .wp-section {
+                padding: 20px;
+            }
+            
+            .wp-section h3 {
+                font-size: 22px;
+                margin-bottom: 15px;
+            }
+            
+            .token-distribution {
+                justify-content: space-between;
+            }
+            
+            .token-segment {
+                width: calc(50% - 20px);
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .token-percentage {
+                font-size: 24px;
+            }
+            
+            .token-label {
+                font-size: 14px;
+            }
+            
+            .code-block {
+                padding: 15px;
+                margin: 20px 0;
+                font-size: 14px;
+            }
+            
+            .terminal-title {
+                font-size: 12px;
+            }
+            
+            .social-links a {
+                margin: 0 10px;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 20px;
+            }
+            
+            .cta-section {
+                padding: 60px 0;
+            }
+            
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+        }
+        
+        /* Очень маленькие мобильные устройства */
+        @media screen and (max-width: 480px) {
+            .logo {
+                font-size: 28px;
+            }
+            
+            .hero h1 {
+                font-size: 24px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .section-title {
+                font-size: 22px;
+            }
+            
+            .section-title::before,
+            .section-title::after {
+                display: none;
+            }
+            
+            .wp-section h3 {
+                font-size: 20px;
+            }
+            
+            .wp-section ul li {
+                font-size: 14px;
+            }
+            
+            .token-segment {
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .terminal-controls {
+                margin-right: 10px;
+            }
+            
+            .terminal-button {
+                width: 10px;
+                height: 10px;
+                margin-right: 5px;
+            }
+            
+            .cyber-corner {
+                width: 15px;
+                height: 15px;
+            }
+            
+            .roadmap-content {
+                padding: 15px;
+            }
+            
+            .roadmap-date {
+                font-size: 16px;
+            }
+            
+            .roadmap-title {
+                font-size: 18px;
+            }
+            
+            .toc {
+                padding: 15px;
+            }
+            
+            .toc h4 {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            
+            .toc ul li {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">INNOVEX</div>
+            <button class="menu-toggle">≡</button>
+            <nav>
+                <ul>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#roadmap">Роадмап</a></li>
+                    <li><a href="#whitepaper">Вайтпейпер</a></li>
+                    <li><a href="#token">Токен</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="glitch-text" data-text="Создаем будущее технологий">Создаем будущее технологий</h1>
+            <p>Технологический хаб, специализирующийся на исследованиях в области ИИ, робототехники, энергетики и ИТ</p>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">О INNOVEX</h2>
+            <div class="whitepaper">
+                <div class="wp-section">
+                    <div class="terminal-header">
+                        <div class="terminal-controls">
+                            <div class="terminal-button terminal-close"></div>
+                            <div class="terminal-button terminal-minimize"></div>
+                            <div class="terminal-button terminal-maximize"></div>
+                        </div>
+                        <div class="terminal-title">innovex_mission.dat</div>
+                    </div>
+                    <!-- Добавляем декоративные уголки -->
+                    <div class="cyber-corner cyber-corner-tl"></div>
+                    <div class="cyber-corner cyber-corner-tr"></div>
+                    <div class="cyber-corner cyber-corner-bl"></div>
+                    <div class="cyber-corner cyber-corner-br"></div>
+                    
+                    <p>INNOVEX — технологический хаб, специализирующийся на исследованиях в области искусственного интеллекта, робототехники, энергетики и ИТ. Наша миссия — создание прорывных технологий для трансформации ключевых отраслей экономики.</p>
+                    <br>
+                    <p>Мы стремимся объединить талантливых разработчиков, исследователей и предпринимателей для создания инновационных решений, которые изменят мир к лучшему. Наша экосистема строится на принципах открытости, децентрализации и коллективного сотрудничества.</p>
+                </div>
+                <div class="wp-section">
+                    <h3>Наши направления</h3>
+                    <ul>
+                        <li>Исследования в области искусственного интеллекта и машинного обучения</li>
+                        <li>Разработка инновационных решений в робототехнике</li>
+                        <li>Создание эффективных систем в энергетике</li>
+                        <li>Развитие передовых ИТ-технологий</li>
+                        <li>Поддержка перспективных стартапов через кикстарт-платформу</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="roadmap" class="section">
+        <div class="container">
+            <h2 class="section-title">Роадмап</h2>
+            <div class="roadmap">
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-date">Q2 2025</div>
+                        <h3 class="roadmap-title">Запуск токена на TON</h3>
+                        <p>Запуск программы Liquidity Mining и механизма Revenue Sharing</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-date">Q3 2025</div>
+                        <h3 class="roadmap-title">MVP кикстарт-платформы</h3>
+                        <p>Запуск первой версии платформы с базовыми функциями</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-date">Q1 2026</div>
+                        <h3 class="roadmap-title">Полноценный запуск платформы</h3>
+                        <p>Релиз кикстарт-платформы с полным набором функций и первой когортой проектов</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-date">Q3 2026</div>
+                        <h3 class="roadmap-title">Экосистема Open Source</h3>
+                        <p>Развернутая экосистема open source проектов и активное сообщество</p>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-date">Q4 2026</div>
+                        <h3 class="roadmap-title">Глобальное масштабирование</h3>
+                        <p>Расширение экосистемы INNOVEX на международный рынок</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="whitepaper" class="section">
+        <div class="container">
+            <h2 class="section-title">Вайтпейпер</h2>
+            <div class="whitepaper">
+                <div class="toc">
+                    <div class="terminal-header">
+                        <div class="terminal-controls">
+                            <div class="terminal-button terminal-close"></div>
+                            <div class="terminal-button terminal-minimize"></div>
+                            <div class="terminal-button terminal-maximize"></div>
+                        </div>
+                        <div class="terminal-title">innovex_whitepaper.toc</div>
+                    </div>
+                    <h4>Содержание</h4>
+                    <ul>
+                        <li><a href="#wp-intro">1. Введение</a></li>
+                        <li><a href="#wp-vision">2. Видение и миссия</a></li>
+                        <li><a href="#wp-tech">3. Технологическая база</a></li>
+                        <li><a href="#wp-kickstart">4. Кикстарт-платформа</a></li>
+                        <li><a href="#wp-token">5. Токеномика</a></li>
+                        <li><a href="#wp-funding">6. Модели финансирования</a></li>
+                        <li><a href="#wp-opensource">7. Open Source подход</a></li>
+                        <li><a href="#wp-team">8. Команда и партнеры</a></li>
+                    </ul>
+                </div>
+                
+                <div id="wp-intro" class="wp-section">
+                    <h3>1. Введение</h3>
+                    <p>INNOVEX создан для решения фундаментальных проблем в технологической сфере через объединение талантливых разработчиков, исследователей и предпринимателей. Мы видим огромный потенциал в децентрализованных системах и открытых технологиях для создания по-настоящему инновационных решений.</p>
+                    <p>Данный документ описывает основные принципы работы INNOVEX, структуру экосистемы и принципы функционирования токена.</p>
+                </div>
+                
+                <div id="wp-vision" class="wp-section">
+                    <h3>2. Видение и миссия</h3>
+                    <p>Наша миссия — создание прорывных технологий, способных трансформировать ключевые отрасли экономики и улучшить жизнь людей.</p>
+                    <p>Мы стремимся построить экосистему, в которой:</p>
+                    <ul>
+                        <li>Инновации доступны всем благодаря открытому исходному коду</li>
+                        <li>Талантливые разработчики получают поддержку для реализации амбициозных идей</li>
+                        <li>Инвесторы имеют прозрачный механизм участия в перспективных проектах</li>
+                        <li>Технологии развиваются на основе коллективного интеллекта сообщества</li>
+                    </ul>
+                </div>
+                
+                <div id="wp-tech" class="wp-section">
+                    <h3>3. Технологическая база</h3>
+                    <p>В основе INNOVEX лежат следующие технологические компоненты:</p>
+                    <ul>
+                        <li>Блокчейн TON для обеспечения прозрачности и децентрализации</li>
+                        <li>Смарт-контракты для автоматизации процессов и транзакций</li>
+                        <li>Распределенные системы для масштабирования решений</li>
+                        <li>Open Source инфраструктура для совместной разработки</li>
+                    </ul>
+                    <div class="code-block">
+                        <div class="code-line">// Пример структуры смарт-контракта для управления токеном INNOVEX</div>
+                        <div class="code-line">contract InnovexToken {</div>
+                        <div class="code-line">    // Базовые параметры токена</div>
+                        <div class="code-line">    string public name = "INNOVEX";</div>
+                        <div class="code-line">    string public symbol = "INX";</div>
+                        <div class="code-line">    uint8 public decimals = 9;</div>
+                        <div class="code-line">    uint256 public totalSupply = 1000000000 * 10**9;</div>
+                        <div class="code-line">    // ... основной функционал</div>
+                        <div class="code-line">}</div>
+                    </div>
+                </div>
+                
+                <div id="wp-kickstart" class="wp-section">
+                    <h3>4. Кикстарт-платформа</h3>
+                    <p>Кикстарт-платформа INNOVEX — это децентрализованная система для поддержки перспективных технологических проектов. Основные компоненты:</p>
+                    <ul>
+                        <li>Система отбора и верификации проектов через экспертную оценку</li>
+                        <li>Прозрачный механизм финансирования через смарт-контракты</li>
+                        <li>Интеграция с токеном INNOVEX для голосования и инвестирования</li>
+                        <li>Система менторства и экспертной поддержки проектов</li>
+                        <li>Аналитические инструменты для отслеживания прогресса проектов</li>
+                    </ul>
+                    <p>Платформа предоставляет уникальные возможности для различных участников экосистемы:</p>
+                    <ul>
+                        <li><strong>Для стартапов:</strong> доступ к финансированию, экспертизе и сообществу</li>
+                        <li><strong>Для инвесторов:</strong> прозрачная система инвестирования с пониженными рисками</li>
+                        <li><strong>Для экспертов:</strong> возможность участия в перспективных проектах</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="token" class="section">
+        <div class="container">
+            <h2 class="section-title">Токеномика</h2>
+            <div class="whitepaper">
+                <div class="wp-section">
+                    <div class="terminal-header">
+                        <div class="terminal-controls">
+                            <div class="terminal-button terminal-close"></div>
+                            <div class="terminal-button terminal-minimize"></div>
+                            <div class="terminal-button terminal-maximize"></div>
+                        </div>
+                        <div class="terminal-title">innovex_token.dat</div>
+                    </div>
+                    <h3>Токен INNOVEX (INX)</h3>
+                    <p>Токен INNOVEX (INX) — основной элемент экосистемы, обеспечивающий взаимодействие между всеми участниками. Токен построен на блокчейне TON, что обеспечивает высокую скорость транзакций, низкие комиссии и масштабируемость.</p>
+                    <p><strong>Utility токена:</strong></p>
+                    <ul>
+                        <li>Голосование за проекты на кикстарт-платформе</li>
+                        <li>Стейкинг для получения дополнительных вознаграждений</li>
+                        <li>Оплата услуг и продуктов в экосистеме INNOVEX</li>
+                        <li>Участие в управлении платформой (DAO механизм)</li>
+                        <li>Reward система для контрибьюторов open source проектов</li>
+                    </ul>
+                    
+                    <div class="token-distribution">
+                        <div class="token-segment">
+                            <div class="token-percentage">40%</div>
+                            <div class="token-label">Экосистема и развитие</div>
+                        </div>
+                        <div class="token-segment">
+                            <div class="token-percentage">20%</div>
+                            <div class="token-label">Команда и основатели</div>
+                        </div>
+                        <div class="token-segment">
+                            <div class="token-percentage">15%</div>
+                            <div class="token-label">Инвесторы</div>
+                        </div>
+                        <div class="token-segment">
+                            <div class="token-percentage">15%</div>
+                            <div class="token-label">Резерв</div>
+                        </div>
+                        <div class="token-segment">
+                            <div class="token-percentage">10%</div>
+                            <div class="token-label">Маркетинг и партнерства</div>
+                        </div>
+                    </div>
+                    
+                    <p><strong>Модели финансирования и устойчивости:</strong></p>
+                    <ul>
+                        <li><strong>Revenue Sharing:</strong> 30% доходов кикстарт-платформы направляется на выкуп токенов с рынка, создавая органический спрос</li>
+                        <li><strong>Liquidity Mining:</strong> Программа предоставления ликвидности для токена INX с вознаграждением участников</li>
+                        <li><strong>Стратегические партнерства:</strong> Сотрудничество с TON Foundation и другими блокчейн-фондами для получения грантов</li>
+                        <li><strong>Экосистемные гранты:</strong> Выделение токенов для поддержки перспективных разработчиков и проектов</li>
+                    </ul>
+                </div>
+                
+                <div id="wp-funding" class="wp-section">
+                    <h3>Модели финансирования</h3>
+                    <p>INNOVEX использует инновационные механизмы финансирования без прямой продажи токенов, что обеспечивает устойчивость и здоровый рост экосистемы:</p>
+                    <ul>
+                        <li><strong>Revenue Sharing (разделение доходов):</strong> 30% всех доходов кикстарт-платформы автоматически направляется на выкуп токенов с рынка через смарт-контракты, создавая стабильный спрос</li>
+                        <li><strong>Liquidity Mining (майнинг ликвидности):</strong> Пользователи получают вознаграждение в токенах INX за предоставление ликвидности в торговые пары на DEX-биржах</li>
+                        <li><strong>Стратегические партнерства:</strong> Сотрудничество с TON Foundation и другими блокчейн-фондами для получения грантов на развитие экосистемы</li>
+                        <li><strong>Экосистемные гранты:</strong> Выделение токенов разработчикам и проектам, вносящим ценный вклад в экосистему INNOVEX</li>
+                    </ul>
+                    <div class="code-block">
+                        <div class="code-line">// Пример смарт-контракта для автоматического revenue sharing</div>
+                        <div class="code-line">contract RevenueSharing {</div>
+                        <div class="code-line">    // Процент доходов для выкупа токенов</div>
+                        <div class="code-line">    uint256 public buybackPercent = 30;</div>
+                        <div class="code-line">    </div>
+                        <div class="code-line">    // Распределение выкупленных токенов</div>
+                        <div class="code-line">    uint256 public stakersPercent = 60;</div>
+                        <div class="code-line">    uint256 public burnPercent = 20;</div>
+                        <div class="code-line">    uint256 public treasuryPercent = 20;</div>
+                        <div class="code-line">    // ... основной функционал</div>
+                        <div class="code-line">}</div>
+                    </div>
+                </div>
+                
+                <div id="wp-opensource" class="wp-section">
+                    <h3>Open Source подход</h3>
+                    <p>Философия INNOVEX основана на принципах открытого исходного кода. Мы верим, что открытость и доступность технологий — ключ к их быстрому развитию и адаптации.</p>
+                    <ul>
+                        <li>Все основные компоненты платформы будут иметь открытый исходный код</li>
+                        <li>Разработка ведется публично с привлечением сообщества</li>
+                        <li>Создание образовательных материалов и документации</li>
+                        <li>Поддержка контрибьюторов через систему вознаграждений в токенах</li>
+                    </ul>
+                </div>
+                
+                <div id="wp-team" class="wp-section">
+                    <h3>Команда и партнеры</h3>
+                    <p>Команда INNOVEX состоит из опытных специалистов в области блокчейна, искусственного интеллекта, разработки программного обеспечения и бизнес-стратегии.</p>
+                    <p>Ключевые члены команды:</p>
+                    <ul>
+                        <li>Технический директор с опытом в TON и других блокчейн-платформах</li>
+                        <li>Эксперты по искусственному интеллекту и машинному обучению</li>
+                        <li>Специалисты по смарт-контрактам и децентрализованным приложениям</li>
+                        <li>Бизнес-стратеги с опытом в технологических стартапах</li>
+                        <li>Эксперты по развитию сообществ и open source проектов</li>
+                    </ul>
+                    <p>Наши партнеры включают ведущие организации в экосистеме TON, исследовательские институты и технологические компании.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="glitch-text" data-text="Присоединяйтесь к экосистеме INNOVEX">Присоединяйтесь к экосистеме INNOVEX</h2>
+            <p>Станьте частью технологической революции</p>
+            <a href="#" class="cta-button">Инвестировать в токен</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#">&#9993;</a> <!-- Email -->
+                <a href="#">&#9737;</a> <!-- Globe -->
+                <a href="#">&#9762;</a> <!-- Telegram -->
+                <a href="#">&#9748;</a> <!-- Twitter/X -->
+                <a href="#">&#9733;</a> <!-- GitHub -->
+            </div>
+            <p>&copy; 2025 INNOVEX. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Простой скрипт для мобильного меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav');
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+                });
+            }
+            
+            // Инициализация скрытого меню на мобильных
+            if (window.innerWidth <= 768) {
+                nav.style.display = 'none';
+            }
+            
+            // Пересчитываем видимость меню при изменении размера окна
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    nav.style.display = 'block';
+                } else {
+                    nav.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
