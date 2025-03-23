@@ -1,0 +1,156 @@
+/* Стили для раздела ключевых проектов */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.project-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 3px;
+    border-top: 1px solid var(--border);
+    transition: all var(--transition-medium);
+    position: relative;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .project-card:hover {
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.project-title {
+    font-size: 1.8rem;
+    color: var(--accent);
+    margin: 0;
+}
+
+.project-badge {
+    background-color: var(--accent);
+    color: var(--bg);
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.project-subtitle {
+    font-size: 1rem;
+    margin: 5px 0 20px;
+    opacity: 0.8;
+    font-style: italic;
+}
+
+.project-description {
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.project-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+}
+
+.feature-icon {
+    font-size: 1.2rem;
+    margin-right: 10px;
+    color: var(--accent);
+}
+
+.feature-text {
+    font-size: 0.9rem;
+}
+
+.project-status {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border);
+}
+
+.status-label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.status-value {
+    opacity: 0.8;
+}
+
+.projects-integration {
+    margin-top: 50px;
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+}
+
+.projects-integration h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+.integration-diagram {
+    margin-top: 20px;
+    font-family: monospace;
+    overflow-x: auto;
+}
+
+.integration-diagram pre {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.dark-theme .integration-diagram pre {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Адаптивность для проектов */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .project-features {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .project-card {
+        padding: 20px;
+    }
+    
+    .project-title {
+        font-size: 1.5rem;
+    }
+    
+    .integration-diagram pre {
+        font-size: 0.8rem;
+    }
+}
