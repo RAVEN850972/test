@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMTH Token - Whitepaper</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        /* Дополнительные стили для страницы whitepaper */
+        .whitepaper-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 20px 60px;
+        }
+        
+        .whitepaper-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+        }
+        
+        .whitepaper-content {
+            line-height: 1.8;
+        }
+        
+        .whitepaper-content h2 {
+            font-size: 2rem;
+            margin: 40px 0 20px;
+            color: var(--accent);
+        }
+        
+        .whitepaper-content h3 {
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+        }
+        
+        .whitepaper-content h4 {
+            font-size: 1.2rem;
+            margin: 20px 0 10px;
+        }
+        
+        .whitepaper-content p {
+            margin-bottom: 20px;
+        }
+        
+        .whitepaper-content ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .whitepaper-content li {
+            margin-bottom: 10px;
+        }
+        
+        .whitepaper-content pre {
+            background-color: var(--card-bg);
+            padding: 20px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            margin: 20px 0;
+            font-family: monospace;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--accent);
+            color: var(--bg);
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 30px;
+            border: 1px solid var(--accent);
+            transition: all var(--transition-medium);
+        }
+        
+        .download-btn:hover {
+            background-color: transparent;
+            color: var(--accent);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 30px;
+            color: var(--text);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        .back-link:hover {
+            color: var(--accent);
+        }
+        
+        .back-link::before {
+            content: "←";
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .whitepaper-title {
+                font-size: 2rem;
+            }
+            
+            .whitepaper-content h2 {
+                font-size: 1.75rem;
+            }
+            
+            .whitepaper-content h3 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav id="navbar">
+        <div class="container nav-container">
+            <div class="logo">SMTH</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="index.html#about" class="nav-link">О проекте</a>
+                <a href="index.html#tokenomics" class="nav-link">Токеномика</a>
+                <a href="index.html#roadmap" class="nav-link">Roadmap</a>
+                <a href="index.html#contact" class="nav-link">Контакты</a>
+            </div>
+            <div class="theme-toggle" id="theme-toggle">
+                <span class="theme-toggle-icon">☀️</span>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Содержимое Whitepaper -->
+    <div class="whitepaper-container">
+        <a href="index.html" class="back-link">Вернуться на главную</a>
+        
+        <h1 class="whitepaper-title">SMTH Token: Whitepaper</h1>
+        
+        <div class="whitepaper-content">
+            <h2>Резюме</h2>
+            <p>SMTH токен представляет собой инновационный инструмент финансирования проектов компании SmAIth в области робототехники, искусственного интеллекта, энергетики, промышленности и информационных технологий. Токен работает на блокчейне TON, обеспечивая прозрачность, безопасность и децентрализацию управления инвестициями.</p>
+            
+            <h2>1. Введение</h2>
+            <h3>1.1 О компании SmAIth</h3>
+            <p>SmAIth — технологическая компания, специализирующаяся на разработке передовых решений на стыке различных технологических областей:</p>
+            <ul>
+                <li>Робототехника</li>
+                <li>Искусственный интеллект</li>
+                <li>Энергетика</li>
+                <li>Промышленные системы</li>
+                <li>Информационные технологии</li>
+            </ul>
+            
+            <h3>1.2 Миссия и видение</h3>
+            <p>Наша миссия — ускорить внедрение технологических инноваций через децентрализованное финансирование и управление проектами. Мы стремимся создать экосистему, где инвесторы могут напрямую участвовать в развитии передовых технологий, а разработчики получают доступ к необходимому капиталу.</p>
+            
+            <h3>1.3 Проблемы и решения</h3>
+            <h4>Проблемы:</h4>
+            <ul>
+                <li>Высокий порог входа для инвестиций в технологические проекты</li>
+                <li>Недостаток прозрачности в управлении инвестициями</li>
+                <li>Ограниченный доступ к капиталу для инновационных проектов</li>
+                <li>Сложность в оценке перспективности технологических разработок</li>
+            </ul>
+            
+            <h4>Решения:</h4>
+            <ul>
+                <li>Децентрализованная платформа для инвестиций в проекты SmAIth</li>
+                <li>Прозрачный механизм голосования и управления через DAO</li>
+                <li>Модульная структура токена для гибкого развития экосистемы</li>
+                <li>Встроенные механизмы защиты инвесторов</li>
+            </ul>
+            
+            <h2>2. Технология SMTH Токена</h2>
+            <h3>2.1 Блокчейн и инфраструктура</h3>
+            <p>SMTH токен реализован на блокчейне TON, обеспечивая высокую скорость транзакций, низкие комиссии и масштабируемость. Выбор платформы TON обусловлен ее техническими характеристиками и растущей экосистемой.</p>
+            
+            <h3>2.2 Смарт-контракты и безопасность</h3>
+            <p>Токен построен на модульной архитектуре смарт-контрактов с акцентом на безопасность:</p>
+            <ul>
+                <li>Многоуровневая защита от атак</li>
+                <li>Строгий контроль доступа к критическим функциям</li>
+                <li>Механизмы предотвращения манипуляций рынком</li>
+                <li>Регулярные аудиты безопасности</li>
+            </ul>
+            
+            <h3>2.3 Модульная структура</h3>
+            <p>Токен SMTH имеет модульную структуру, включающую:</p>
+            <ul>
+                <li><strong>Базовый токен</strong>: Основные функции ERC20</li>
+                <li><strong>Модуль управления</strong>: DAO для принятия решений</li>
+                <li><strong>Модуль стейкинга</strong>: Механизмы поощрения долгосрочного владения</li>
+                <li><strong>Модуль вестинга</strong>: Контролируемое распределение токенов</li>
+                <li><strong>Модуль Kickstarter</strong>: Платформа для финансирования проектов</li>
+            </ul>
+            
+            <pre>
+                     [SMTH TOKEN BASE]
+                    /         |         \
+           [GOVERNANCE]   [STAKING]   [VESTING]
+              /    \        /   \       /    \
+    [PROPOSALS] [MODULES] [REWARDS] [SCHEDULES]
+                           /    \
+                   [KICKSTARTER] [INTEGRATION]
+            </pre>
+            
+            <h2>3. Токеномика</h2>
+            <h3>3.1 Распределение токенов</h3>
+            <p><strong>Максимальное предложение</strong>: 1.5 млрд токенов<br>
+            <strong>Начальное предложение</strong>: 1 млрд токенов</p>
+            
+            <p>Распределение:</p>
+            <ul>
+                <li>40% - Команда SmAIth (подлежит вестингу)</li>
+                <li>30% - DAO (для управления и голосования)</li>
+                <li>20% - Резерв проекта (финансирование разработки)</li>
+                <li>10% - Начальная ликвидность (для торговли на биржах)</li>
+            </ul>
+            
+            <h3>3.2 Механизмы стабилизации</h3>
+            <p>Для поддержания здоровой экономики токена используются:</p>
+            <ul>
+                <li>Комиссии за транзакции с частичным сжиганием</li>
+                <li>Вознаграждения за стейкинг</li>
+                <li>Лимиты на крупные транзакции</li>
+                <li>Защита от манипуляций рынком</li>
+            </ul>
+            
+            <h3>3.3 Экономический поток</h3>
+            <ul>
+                <li>Часть комиссий направляется в казначейство для финансирования развития</li>
+                <li>Проекты, получившие финансирование, возвращают процент от доходов в экосистему</li>
+                <li>Держатели токенов получают приоритетный доступ к новым проектам и технологиям</li>
+                <li>Механизм вестинга обеспечивает долгосрочную заинтересованность команды</li>
+            </ul>
+            
+            <h2>4. Экосистема и применение</h2>
+            <h3>4.1 Платформа для проектов</h3>
+            <p>Основное применение токена SMTH — финансирование проектов SmAIth через модуль Kickstarter:</p>
+            <ul>
+                <li>Прозрачный отбор проектов</li>
+                <li>Управление рисками через DAO</li>
+                <li>Отслеживание прогресса проектов</li>
+                <li>Распределение доходов от успешных проектов</li>
+            </ul>
+            
+            <h3>4.2 Направления проектов</h3>
+            <h4>Робототехника</h4>
+            <ul>
+                <li>Автономные системы</li>
+                <li>Промышленные роботы</li>
+                <li>Сервисная робототехника</li>
+                <li>Роботизированные комплексы</li>
+            </ul>
+            
+            <h4>Искусственный интеллект</h4>
+            <ul>
+                <li>Системы машинного обучения</li>
+                <li>Нейронные сети</li>
+                <li>Обработка естественного языка</li>
+                <li>Компьютерное зрение</li>
+            </ul>
+            
+            <h4>Энергетика</h4>
+            <ul>
+                <li>Возобновляемые источники энергии</li>
+                <li>Оптимизация энергопотребления</li>
+                <li>Умные сети</li>
+                <li>Распределенная генерация</li>
+            </ul>
+            
+            <h4>Промышленность</h4>
+            <ul>
+                <li>Автоматизация производства</li>
+                <li>Цифровые двойники</li>
+                <li>Предиктивное обслуживание</li>
+                <li>Оптимизация цепочек поставок</li>
+            </ul>
+            
+            <h4>ИТ-сфера</h4>
+            <ul>
+                <li>Распределенные системы</li>
+                <li>Облачные технологии</li>
+                <li>Кибербезопасность</li>
+                <li>Обработка больших данных</li>
+            </ul>
+            
+            <h3>4.3 Преимущества для держателей токенов</h3>
+            <ul>
+                <li>Участие в управлении через DAO</li>
+                <li>Доступ к инвестициям в передовые технологии</li>
+                <li>Доход от успешных проектов</li>
+                <li>Вознаграждения за стейкинг</li>
+                <li>Скидки на продукты и услуги SmAIth</li>
+            </ul>
+            
+            <h2>5. Управление и DAO</h2>
+            <h3>5.1 Структура управления</h3>
+            <p>SMTH использует двухуровневую структуру управления:</p>
+            <ul>
+                <li>Стратегический уровень: ключевые решения по развитию экосистемы</li>
+                <li>Операционный уровень: ежедневные решения по проектам и распределению средств</li>
+            </ul>
+            
+            <h3>5.2 Процесс принятия решений</h3>
+            <ol>
+                <li><strong>Создание предложения</strong> - любой держатель определенного количества токенов может выдвинуть предложение</li>
+                <li><strong>Обсуждение</strong> - период для анализа и дебатов</li>
+                <li><strong>Голосование</strong> - взвешенное по количеству токенов и длительности стейкинга</li>
+                <li><strong>Исполнение</strong> - автоматическое выполнение одобренных предложений</li>
+            </ol>
+            
+            <h3>5.3 Роли и ответственности</h3>
+            <ul>
+                <li><strong>Делегаты</strong> - избираемые представители для экспертной оценки</li>
+                <li><strong>Смарт-контракты</strong> - автоматическое исполнение решений</li>
+                <li><strong>Рабочие группы</strong> - специализированные команды для разных направлений</li>
+                <li><strong>Аудиторы</strong> - независимый контроль за исполнением решений</li>
+            </ul>
+            
+            <h2>6. Roadmap и будущее развитие</h2>
+            <p>План развития SMTH токена включает несколько ключевых этапов:</p>
+            
+            <h3>Q2 2025: Фаза запуска</h3>
+            <ul>
+                <li>Ребрендинг и миграция от INNOVEX к SMTH токену</li>
+                <li>Запуск базового контракта на TON</li>
+                <li>Начальное распределение токенов согласно схеме</li>
+                <li>Листинг на биржах и обеспечение ликвидности</li>
+                <li>Развертывание модуля стейкинга с базовым функционалом</li>
+            </ul>
+            
+            <h3>Q3 2025: Базовая экосистема</h3>
+            <ul>
+                <li>Запуск DAO Governance для децентрализованных решений</li>
+                <li>Пилотное финансирование первых проектов SmAIth</li>
+                <li>Внешний аудит смарт-контрактов и оптимизация</li>
+                <li>Активация графика вестинга для команды</li>
+                <li>Стратегические партнерства с компаниями в сфере ИИ и робототехники</li>
+            </ul>
+            
+            <h3>Q4 2025: Расширение функциональности</h3>
+            <ul>
+                <li>Запуск полноценной платформы Kickstarter</li>
+                <li>Интеграция с внешними DeFi протоколами</li>
+                <li>Внедрение расширенной аналитики для проектов</li>
+                <li>Оптимизация комиссий и экономической модели</li>
+                <li>Завершение первых успешных проектов, профинансированных через SMTH</li>
+            </ul>
+            
+            <h3>2026+: Масштабирование и полная децентрализация</h3>
+            <ul>
+                <li>Передача дополнительных полномочий сообществу</li>
+                <li>Интеграция с другими блокчейнами через мосты</li>
+                <li>Расширение в новые технологические области</li>
+                <li>Полная децентрализация управления</li>
+                <li>Глобальное расширение экосистемы</li>
+            </ul>
+            
+            <h2>7. Команда и партнеры</h2>
+            <h3>7.1 Основная команда</h3>
+            <p>SmAIth объединяет профессионалов с опытом в технологиях, финансах и блокчейне:</p>
+            <ul>
+                <li>Эксперты в робототехнике и ИИ</li>
+                <li>Специалисты по блокчейн-технологиям</li>
+                <li>Финансовые аналитики</li>
+                <li>Специалисты по безопасности</li>
+            </ul>
+            
+            <h3>7.2 Советники и партнеры</h3>
+            <p>Проект поддерживается сетью советников и партнеров:</p>
+            <ul>
+                <li>Академические институты</li>
+                <li>Технологические компании</li>
+                <li>Венчурные фонды</li>
+                <li>Индустриальные партнеры</li>
+            </ul>
+            
+            <h2>8. Заключение</h2>
+            <p>SMTH токен представляет собой инновационный подход к финансированию технологических проектов, объединяя преимущества децентрализованных финансов с экспертизой в области передовых технологий. Модульная архитектура, многоуровневая безопасность и продуманная экономическая модель создают основу для устойчивого развития экосистемы SmAIth.</p>
+            
+            <p>Мы стремимся создать платформу, где инновации в робототехнике, искусственном интеллекте, энергетике, промышленности и ИТ получают необходимое финансирование и поддержку для трансформации из идей в реальные решения, меняющие мир.</p>
+            
+            <a href="docs/SMTH_Whitepaper.pdf" class="download-btn">Скачать Whitepaper PDF</a>
+        </div>
+    </div>
+    
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">SMTH</div>
+            <p>Инновационный токен SmAIth для финансирования будущего</p>
+            
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Главная</a>
+                <a href="whitepaper.html" class="footer-link">Whitepaper</a>
+                <a href="roadmap.html" class="footer-link">Roadmap</a>
+                <a href="index.html#contact" class="footer-link">Контакты</a>
+            </div>
+            
+            <p class="footer-copyright">© 2025 SmAIth. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script src="js/theme.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Инициализация переключателя темы
+            if (window.themeManager) {
+                window.themeManager.setupThemeToggle();
+                window.themeManager.checkUserPreferences();
+            }
+            
+            // Добавляем обработчик для кнопки мобильного меню
+            const mobileMenuToggle = document.createElement('div');
+            mobileMenuToggle.className = 'mobile-menu-toggle';
+            mobileMenuToggle.innerHTML = '<span>☰</span>';
+            
+            const navContainer = document.querySelector('.nav-container');
+            const navLinks = document.querySelector('.nav-links');
+            const themeToggle = document.querySelector('.theme-toggle');
+            
+            navContainer.insertBefore(mobileMenuToggle, themeToggle);
+            
+            mobileMenuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenuToggle.classList.toggle('active');
+            });
+            
+            // Изменение навигационной панели при скролле
+            const navbar = document.getElementById('navbar');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Проверяем текущее положение скролла
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
