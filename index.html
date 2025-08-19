@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Тест Stars</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;">
+  <h1>Оплата Stars</h1>
+  <button id="payBtn" style="padding:12px 24px;font-size:18px;border:none;border-radius:10px;background:#0088cc;color:white;">
+    Купить за 5 ⭐
+  </button>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+
+    document.getElementById("payBtn").addEventListener("click", async () => {
+      const res = await fetch("/get_invoice"); // запрос к серверу
+      const data = await res.json();
+      tg.openInvoice(data.payload); // открываем Stars оплату
+    });
+  </script>
+</body>
+</html>
