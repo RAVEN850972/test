@@ -1,29 +1,352 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Stars Оплата</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Roulette</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;">
-  <h1>Купить за 5 ⭐</h1>
-  <button id="payBtn" style="padding:12px 24px;font-size:18px;border:none;border-radius:10px;background:#0088cc;color:white;">
-    Оплатить
-  </button>
+<body>
+    <div id="authScreen" class="auth-screen">
+        <div class="container">
+            <div class="logo">🎰</div>
+            <h1>Telegram Roulette</h1>
+            <p class="subtitle">Открывай кейсы и выигрывай призы!</p>
+            
+            <div id="authStatus" class="auth-button" style="cursor: default;">
+                Авторизация...
+            </div>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.ready();
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <span>Авторизация...</span>
+            </div>
 
-    document.getElementById("payBtn").addEventListener("click", async () => {
-      const res = await fetch("/get_invoice", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ initData: tg.initData })
-      });
-      const data = await res.json();
-      tg.openInvoice(data.payload);
-    });
-  </script>
+            <div id="error" class="error"></div>
+            <div id="success" class="success"></div>
+
+            <div id="userInfo" class="user-info">
+                <h3>Информация о пользователе:</h3>
+                <p><strong>Имя:</strong> <span id="userName"></span></p>
+                <p><strong>Username:</strong> <span id="userUsername"></span></p>
+                <p><strong>ID:</strong> <span id="userId"></span></p>
+                <p><strong>Баланс:</strong> <span id="userBalance"></span> ⭐</p>
+                <p><strong>Открыто кейсов:</strong> <span id="userCases"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainScreen" class="main-screen">
+        <div class="header">
+            <div class="profile-info">
+                <div class="user-avatar" id="userAvatarMain" onclick="showProfileScreen()"></div>
+                <div class="user-details">
+                    <h2 id="userNameMain"></h2>
+                    <p id="userUsernameMain"></p>
+                </div>
+            </div>
+
+            <div class="balance-section">
+                <div class="balance-amount" id="userBalanceMain">0.00 ⭐</div>
+                <div class="balance-label">Ваш баланс</div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="userCasesMain">0</div>
+                    <div class="stat-label">Кейсов открыто</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="userItemsMain">0</div>
+                    <div class="stat-label">Предметов</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cases-section">
+            <h2 class="section-title">Доступные кейсы</h2>
+            <div class="cases-grid" id="casesGrid">
+                <!-- Кейсы будут загружены динамически -->
+            </div>
+        </div>
+
+        <button class="deposit-button" onclick="showDepositScreen()">
+            💰 Пополнить баланс
+        </button>
+    </div>
+
+    <div id="depositScreen" class="deposit-screen">
+        <button class="back-button" onclick="showMainScreen()">
+            ← Назад
+        </button>
+
+        <div class="deposit-header">
+            <h1 class="deposit-title">Пополнение баланса</h1>
+            <p class="deposit-subtitle">Выберите сумму и способ оплаты</p>
+        </div>
+
+        <div class="current-balance">
+            <div class="current-balance-label">Текущий баланс</div>
+            <div class="current-balance-amount" id="currentBalanceDeposit">0.00 ⭐</div>
+        </div>
+
+        <div class="deposit-amounts">
+            <h3 class="amounts-title">Выберите сумму</h3>
+            <div class="amounts-grid">
+                <div class="amount-card" onclick="selectAmount(50)">
+                    <div class="amount-value">50</div>
+                    <div class="amount-stars">⭐ Stars</div>
+                </div>
+                <div class="amount-card" onclick="selectAmount(100)">
+                    <div class="amount-value">100</div>
+                    <div class="amount-stars">⭐ Stars</div>
+                </div>
+                <div class="amount-card" onclick="selectAmount(250)">
+                    <div class="amount-value">250</div>
+                    <div class="amount-stars">⭐ Stars</div>
+                </div>
+                <div class="amount-card" onclick="selectAmount(500)">
+                    <div class="amount-value">500</div>
+                    <div class="amount-stars">⭐ Stars</div>
+                </div>
+                <div class="amount-card" onclick="selectAmount(1000)">
+                    <div class="amount-value">1000</div>
+                    <div class="amount-stars">⭐ Stars</div>
+                </div>
+                <div class="amount-card" onclick="selectAmount(2500)">
+                    <div class="amount-value">2500</div>
+                    <div class="amount-stars">⭐ Stars</div>
+                </div>
+            </div>
+
+            <div class="custom-amount">
+                <div class="custom-amount-label">Или введите свою сумму</div>
+                <input type="number" 
+                       class="custom-amount-input" 
+                       id="customAmountInput"
+                       placeholder="Введите сумму в Stars"
+                       min="1"
+                       oninput="selectCustomAmount()">
+            </div>
+        </div>
+
+        <div class="payment-methods">
+            <h3 class="payment-methods-title">Способ оплаты</h3>
+            
+            <div class="payment-method selected" onclick="selectPaymentMethod('telegram_stars')">
+                <div class="payment-method-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">⭐</div>
+                <div class="payment-method-info">
+                    <div class="payment-method-name">Telegram Stars</div>
+                    <div class="payment-method-desc">Оплата через Telegram Stars</div>
+                </div>
+            </div>
+
+            <div class="payment-method" onclick="selectPaymentMethod('ton')">
+                <div class="payment-method-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">💎</div>
+                <div class="payment-method-info">
+                    <div class="payment-method-name">TON Blockchain</div>
+                    <div class="payment-method-desc">Оплата через TON криптокошелек</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="deposit-summary">
+            <div class="summary-row">
+                <span>Сумма пополнения:</span>
+                <span id="summaryAmount">0 ⭐</span>
+            </div>
+            <div class="summary-row">
+                <span>Комиссия:</span>
+                <span id="summaryFee">0 ⭐</span>
+            </div>
+            <div class="summary-row">
+                <span>К доплате:</span>
+                <span id="summaryTotal">0 ⭐</span>
+            </div>
+        </div>
+
+        <button class="confirm-deposit-button" id="confirmDepositButton" onclick="confirmDeposit()" disabled>
+            Пополнить баланс
+        </button>
+    </div>
+
+    <div id="caseOpeningScreen" class="case-opening-screen">
+        <button class="back-button" onclick="closeCaseOpening()">
+            ← Назад
+        </button>
+
+        <div class="case-opening-header">
+            <div class="opening-case-info">
+                <div class="opening-case-image" id="openingCaseImage">📦</div>
+                <h2 id="openingCaseName">Case Name</h2>
+                <p class="opening-case-price" id="openingCasePrice">150 ⭐</p>
+            </div>
+        </div>
+
+        <div class="case-contents-section">
+            <h3 class="section-title">Возможные призы</h3>
+            <div class="case-contents-grid" id="caseContentsGrid">
+                <!-- Содержимое кейса загружается динамически -->
+            </div>
+        </div>
+
+        <div id="caseSpinAnimation" class="case-spin-animation" style="display: none;">
+            <div class="spin-wheel">
+                <div class="spinner-large"></div>
+            </div>
+            <p>Открываем кейс...</p>
+        </div>
+
+        <div id="caseResult" class="case-result" style="display: none;">
+            <div class="result-header">
+                <h2>🎉 Поздравляем!</h2>
+                <p>Вы получили:</p>
+            </div>
+            
+            <div class="won-item">
+                <div class="won-item-image" id="wonItemImage"></div>
+                <h3 id="wonItemName">Item Name</h3>
+                <span class="won-item-rarity" id="wonItemRarity">legendary</span>
+            </div>
+            
+            <div class="result-balance">
+                <p>Новый баланс: <span id="newBalanceAmount">0.00 ⭐</span></p>
+            </div>
+            
+            <button class="continue-button" onclick="closeCaseOpening()">
+                Продолжить
+            </button>
+        </div>
+
+        <button class="spin-case-button" id="spinCaseButton" onclick="spinCase()">
+            Открыть за <span id="openingCasePrice2">150</span> ⭐
+        </button>
+    </div>
+
+    <div id="profileScreen" class="profile-screen">
+        <div class="profile-header">
+            <button class="back-button" onclick="showMainScreen()">
+                ← Назад
+            </button>
+            
+            <div class="profile-info-detailed">
+                <div class="profile-avatar-large" id="profileAvatarLarge"></div>
+                <h2 id="profileNameLarge"></h2>
+                <p id="profileUsernameLarge"></p>
+                <div class="profile-id">ID: <span id="profileTelegramId"></span></div>
+            </div>
+        </div>
+
+        <div class="profile-stats-detailed">
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-info">
+                    <div class="stat-value" id="profileBalance">0.00 ⭐</div>
+                    <div class="stat-label">Баланс</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">📦</div>
+                <div class="stat-info">
+                    <div class="stat-value" id="profileCasesOpened">0</div>
+                    <div class="stat-label">Кейсов открыто</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🎁</div>
+                <div class="stat-info">
+                    <div class="stat-value" id="profileItemsCount">0</div>
+                    <div class="stat-label">Предметов</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">💎</div>
+                <div class="stat-info">
+                    <div class="stat-value" id="profileTotalValue">0 ⭐</div>
+                    <div class="stat-label">Общая стоимость</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-tabs">
+            <button class="tab-button active" onclick="switchTab('inventory')">
+                🎒 Инвентарь
+            </button>
+            <button class="tab-button" onclick="switchTab('history')">
+                📋 История
+            </button>
+        </div>
+
+        <div id="inventoryTab" class="tab-content active">
+            <div class="inventory-header">
+                <h3>Ваш инвентарь</h3>
+                <div class="inventory-filters">
+                    <select id="rarityFilter" onchange="filterInventory()">
+                        <option value="all">Все редкости</option>
+                        <option value="common">Обычные</option>
+                        <option value="rare">Редкие</option>
+                        <option value="epic">Эпические</option>
+                        <option value="legendary">Легендарные</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="inventoryGrid" class="inventory-grid">
+                <!-- Предметы инвентаря будут загружены динамически -->
+            </div>
+            
+            <div id="emptyInventory" class="empty-state" style="display: none;">
+                <div class="empty-icon">📦</div>
+                <h3>Инвентарь пуст</h3>
+                <p>Откройте кейсы, чтобы получить предметы</p>
+                <button class="empty-action-button" onclick="showMainScreen()">
+                    Открыть кейсы
+                </button>
+            </div>
+        </div>
+
+        <div id="historyTab" class="tab-content">
+            <div class="history-header">
+                <h3>История игр</h3>
+            </div>
+            
+            <div id="historyList" class="history-list">
+                <!-- История будет загружена динамически -->
+            </div>
+            
+            <div id="emptyHistory" class="empty-state" style="display: none;">
+                <div class="empty-icon">📋</div>
+                <h3>История пуста</h3>
+                <p>Откройте первый кейс, чтобы начать историю</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно предмета -->
+    <div id="itemModal" class="item-modal" style="display: none;" onclick="closeItemModal()">
+        <div class="item-modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeItemModal()">×</button>
+            
+            <div class="modal-item-image" id="modalItemImage"></div>
+            <h3 id="modalItemName">Item Name</h3>
+            <div class="modal-item-rarity" id="modalItemRarity">legendary</div>
+            <div class="modal-item-price" id="modalItemPrice">500 ⭐</div>
+            
+            <div class="modal-item-actions">
+                <button class="modal-action-button sell-button" id="sellItemButton" onclick="sellItem()">
+                    💰 Продать за <span id="sellPrice">400</span> ⭐
+                </button>
+                <button class="modal-action-button withdraw-button" onclick="withdrawItem()">
+                    📤 Вывести
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
